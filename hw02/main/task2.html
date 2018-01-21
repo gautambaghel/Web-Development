@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title> Task 2 </title>
+<Script>
+    function showAlert() {
+    	 let n = document.getElementById("number").innerText;
+         alert(n);
+    } 
+
+	function increment() {
+          let n = document.getElementById("number").innerText;
+          n++;
+          document.getElementById("number").innerText = n;
+	}
+
+	function append() {
+          
+        let p = document.createElement("p");
+        let n = document.getElementById("number").innerText;
+        let node = document.createTextNode(n);
+        p.appendChild(node);
+
+        let body = document.getElementsByTagName("body")[0]
+        body.appendChild(p);
+	}
+</Script>
+</head>
+<body>
+
+<h1 id="number"> 10</h1>
+
+<button type="button" onclick="showAlert()">Alert</button>
+
+<button type="button" onclick="increment()">Increment</button>
+
+<button type="button" onclick="append()">Append</button>
+
+</body>
+</html>
