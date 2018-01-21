@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+    box-sizing: border-box;
+}
+.header {
+   font-size: 150%;
+}
+.menu {
+    width: 33%;
+}
+.content {
+    width: 66%;
+    padding-right: 15px
+}
+.column {
+    float: left;
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+</style>
+<script type="text/javascript">
+
+     window.onload = function() {
+
+	 let bottles = document.getElementById("bottlesText").style.display = "none"
+	 let third = document.getElementById("thirdText").style.display = "none"
+
+     }
+
+	function displayLorem() {
+
+	let lorem = document.getElementById("loremText")
+	let bottles = document.getElementById("bottlesText")
+	let third = document.getElementById("thirdText")
+
+           lorem.style.display = "block"
+           bottles.style.display = "none"
+           third.style.display = "none"
+	}
+
+	function displayBottles(){
+
+	let lorem = document.getElementById("loremText")
+	let bottles = document.getElementById("bottlesText")
+	let third = document.getElementById("thirdText")
+		
+           lorem.style.display = "none"
+           bottles.style.display = "block"
+           third.style.display = "none"
+	}
+
+	function displaylastThing(){
+
+	let lorem = document.getElementById("loremText")
+	let bottles = document.getElementById("bottlesText")
+	let third = document.getElementById("thirdText")
+		
+           lorem.style.display = "none"
+           bottles.style.display = "none"
+           third.style.display = "block"
+	}
+</script>
+</head>
+<body>
+
+<div class="header">
+  <h1>HW02 Task Three</h1>
+</div>
+
+<div class="clearfix">
+  <div class="column menu">
+    <ul>
+      <li><a  href="javascript:displayLorem();">Lorem Ipsem</a></li>
+      <li><a  href="javascript:displayBottles();">99 Bottles</a></li>
+      <li><a  href="javascript:displaylastThing();">Last Thing</a></li>
+    </ul>
+  </div>
+
+  <div class="column content">
+    <div id="loremText">
+
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nunc neque, porttitor vitae vestibulum non, sollicitudin imperdiet mauris. Quisque sodales lacus vitae tortor condimentum imperdiet id ac ligula. Mauris interdum tortor ligula, non feugiat erat mollis sollicitudin. Maecenas ut ipsum tincidunt, facilisis ante ut, placerat lacus. Etiam tincidunt nibh in magna gravida lobortis. Praesent mattis vestibulum mauris, sed rhoncus ex posuere et. Vivamus ut sem ante. Ut placerat velit massa, non condimentum leo accumsan a. Etiam porta, lectus vitae aliquet aliquet, nibh quam ornare erat, eu faucibus ipsum lorem a tellus. Quisque sagittis eleifend vestibulum.
+</p>
+
+<p>
+Ut tincidunt efficitur tortor, sit amet pretium mauris lacinia placerat. Quisque placerat odio ipsum, sit amet tempus ipsum mollis vitae. Maecenas ac condimentum lorem. Aliquam faucibus fringilla vehicula. Maecenas non luctus risus. Ut pulvinar orci vitae dui cursus accumsan. Donec ultricies varius massa, vitae feugiat velit porta viverra. Curabitur bibendum porta turpis in tincidunt. Curabitur finibus commodo nisi, ac malesuada orci lobortis non. Etiam sit amet elementum nisi, vitae finibus orci.
+</p>
+
+<p>
+Praesent auctor leo sapien, in volutpat nulla elementum maximus. Nam iaculis vitae mauris tincidunt elementum. Aenean tincidunt est urna, non ultrices dui dapibus vel. Sed tellus velit, auctor et dui ut, sagittis malesuada diam. Cras dapibus lobortis felis, sit amet posuere felis ullamcorper ut. Phasellus iaculis viverra nulla, id posuere erat tristique sed. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ultrices nulla eget nisl rhoncus placerat. Donec at cursus leo. Aliquam gravida felis ac consectetur tristique. Pellentesque ut feugiat lectus, vitae tristique nisi. Maecenas eu varius nibh. Sed congue euismod dolor ac cursus. Proin non lectus varius, aliquet erat et, sollicitudin velit. Pellentesque aliquet elementum elit at mollis. Duis venenatis enim libero, bibendum vulputate odio hendrerit eget.
+</p>
+
+<p>
+Cras aliquet ullamcorper luctus. Vivamus ac dolor nec eros iaculis finibus. Mauris eleifend tellus vitae arcu iaculis, a fringilla mi ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut ac dui enim. Phasellus ultricies sollicitudin odio. Aliquam eu tempor nibh, sed rhoncus nibh. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean ut lectus sit amet ex congue lobortis id quis sapien. Nam viverra, elit non euismod placerat, nisl ante venenatis nunc, at varius turpis justo in enim. Nam in ex in ante commodo molestie tempus a magna. Aenean sapien justo, pellentesque ut scelerisque non, pulvinar non orci. 
+ </p>
+   </div>
+
+   <div id="bottlesText">
+   	
+   	<p>
+   	99 bottles of beer on the wall, 99 bottles of beer.
+    Take one down and pass it around, 98 bottles of beer on the wall.
+    </p>
+    
+    <p>
+    98 bottles of beer on the wall, 98 bottles of beer.
+    Take one down and pass it around, 97 bottles of beer on the wall.
+    </p>
+
+    <p>
+    97 bottles of beer on the wall, 97 bottles of beer.
+    Take one down and pass it around, 96 bottles of beer on the wall.
+    </p>
+
+    <p>
+    96 bottles of beer on the wall, 96 bottles of beer.
+    Take one down and pass it around, 95 bottles of beer on the wall.
+    </p>
+
+   </div>
+
+ <div id="thirdText">
+ 	this is the third thing
+ </div>
+
+  </div>
+</div>
+
+<p><cite>The <a href="https://en.wikipedia.org/wiki/Lorem_ipsum" target="_blank">lorem Ipsum</a> text and <a href="https://en.wikipedia.org/wiki/99_Bottles_of_Beer" target="_blank"> 99 bottles </a> are taken from Wikipedia</cite></p>
+</body>
+</html>
