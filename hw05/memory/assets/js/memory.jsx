@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from 'reactstrap';
 
-export default function run_demo(root) {
-  ReactDOM.render(<Demo side={0} start={Date.now()}/>, root);
+export default function game_init(root, channel) {
+  ReactDOM.render(<Memory channel={channel}/>, root);
 }
 
 // App state is:
@@ -16,7 +16,7 @@ export default function run_demo(root) {
 //         1 -> Flipped
 //         2 -> Done
 
-class Demo extends React.Component {
+class Memory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,37 +25,35 @@ class Demo extends React.Component {
       seenThis: [0,0,0,0,0,0,0,0],
       points: 0,
     };
+    this.channel = props.channel;
+    this.channel.join()
+        .receive("ok", this.gotView.bind(this), this.processSocket(this))
+        .receive("error", resp => { console.log("Unable to join", resp) });
   }
 
-    populateBoard() {
-      let letterSet = ["A","B","C","D","E","F","G","H"];
-      letterSet = letterSet.concat(letterSet); 
-      this.shuffle(letterSet)
-      let xs = []; // empty array
-
-      _.map(letterSet, (listValue) => {
-        return xs.push({ letter: listValue, status: 0 });
-      });
-
-      this.setState({ 
-        tiles: xs, 
-        clickedTiles: 0,
-        seenThis: [0,0,0,0,0,0,0,0],
-        points: 0,});
+    gotView(view) {
+      console.log("View instantiated", view);
+      this.setState(view.game);
     }
 
-    shuffle(a) {
-      var j, x, i;
-      for (i = a.length - 1; i > 0; i--) {
-           j = Math.floor(Math.random() * (i + 1));
-           x = a[i];
-           a[i] = a[j];
-           a[j] = x;
-        }
+    sendGuess(xs, clicks) {
+      this.channel.push("guess", { tiles: xs , clickedTiles: clicks+1})
+        .receive("ok", this.gotView.bind(this));
     }
 
-    componentDidMount() {
-       this.populateBoard();
+    sendPoints(st, pts) {
+      this.channel.push("putPoints", { seenThis: st, points: pts})
+        .receive("ok", this.gotView.bind(this));
+    }
+
+    sendRestart() {
+      this.channel.push("restart", _)
+        .receive("ok", this.gotView.bind(this));
+    }
+
+    processSocket(socket) {
+      console.log("Socket set", socket);
+      this.socket = socket;
     }
 
     componentWillUnmount() {
@@ -70,7 +68,7 @@ class Demo extends React.Component {
 
         if (sum == 32) {
           alert(" \n You Won! \n \n \n " + this.state.points + " points!\n \n \n Play Again?");
-          this.populateBoard();
+          this.sendRestart();
         }
     }
 
@@ -108,7 +106,8 @@ class Demo extends React.Component {
     });
 
     let clicks = this.state.clickedTiles;
-    this.setState({ tiles: xs , clickedTiles: clicks+1});
+    // this.setState({ tiles: xs , clickedTiles: clicks+1});
+    this.sendGuess(xs,clicks);
     setTimeout(() => {
         this.hideFlipped(),
         this.checkIfGameFinished();
@@ -123,10 +122,8 @@ class Demo extends React.Component {
            if(listValue == letter){
                let xs = this.state.seenThis;
                let earnedPoints = 0;
-                   
+                  
                xs[cursor]++;
-               console.log(xs);
-
                if(givePoints) {
                    if (xs[cursor] <= 4) {
                       earnedPoints = 15;
@@ -138,7 +135,8 @@ class Demo extends React.Component {
                }
                
                let points = this.state.points;
-               return this.setState({ seenThis: xs, points: (earnedPoints + points)});
+               // return this.setState({ seenThis: xs, points: (earnedPoints + points)});
+               this.sendPoints(xs, (earnedPoints + points));
            } else {
               cursor++;
            }
@@ -161,7 +159,7 @@ class Demo extends React.Component {
       <div className="row">
          <h2 id="point">Points earned: {this.state.points}</h2>
          <div  className="restart-button">
-           <Button onClick={ () => {this.populateBoard();} }>Restart</Button>
+           <Button onClick={ () => {this.sendRestart();} }>Restart</Button>
          </div>
       </div> 
 
