@@ -27,12 +27,11 @@ class Memory extends React.Component {
     };
     this.channel = props.channel;
     this.channel.join()
-        .receive("ok", this.gotView.bind(this), this.processSocket(this))
+        .receive("ok", this.gotView.bind(this))
         .receive("error", resp => { console.log("Unable to join", resp) });
   }
 
     gotView(view) {
-      console.log("View instantiated", view);
       this.setState(view.game);
     }
 
@@ -49,11 +48,6 @@ class Memory extends React.Component {
     sendRestart() {
       this.channel.push("restart", _)
         .receive("ok", this.gotView.bind(this));
-    }
-
-    processSocket(socket) {
-      console.log("Socket set", socket);
-      this.socket = socket;
     }
 
     componentWillUnmount() {
