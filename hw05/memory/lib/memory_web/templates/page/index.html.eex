@@ -1,7 +1,15 @@
+
+<script>
+	function join() {
+		var name = document.getElementById("box").value
+		window.location.href = "/game/"+ name
+	}
+</script>
 <div class="row">
   <div class="col">
     <h1 id="index-page">Join a Game</h1>
-    <p><a href="/game/Memory">Join</a></p>
-    <p id="game-output"></p>
+    <!-- <p><a href="/game/Gautam">Join</a></p> -->
+    <input type="text" id="box" placeholder="username"/> 
+    <input type="button" onclick="join()" value="Join">
   </div>
 </div>
