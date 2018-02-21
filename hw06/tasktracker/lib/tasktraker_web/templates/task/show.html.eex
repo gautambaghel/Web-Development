@@ -1,0 +1,17 @@
+<h1><strong>Task Description</strong></h1>
+     <br>
+
+    <h2><%= @task.name %></h2>
+     <br>
+    <div class="card">
+      <div class="card-body">
+        <span class="float-right"><strong>Time currently spent:</strong> <%= @task.time %></span>
+        <h5 class="card-title"><strong>Description:</strong></h5>
+        <h6 class="card-subtitle mb-2 text-muted">To be done by <%= @task.user_id_assigned %> | assigned by <%= @task.user.name %></h6>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p><%= @task.description %></p>
+      </div>
+    </div>
+
+     <br>
+<span><%= link "\<\<\ Go Back", to: task_path(@conn, :index), class: "btn btn-outline-primary btn-xs" %></span>
