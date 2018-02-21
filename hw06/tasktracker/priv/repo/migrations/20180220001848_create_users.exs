@@ -3,8 +3,8 @@ defmodule Tasktraker.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :email, :string
-      add :name, :string
+      add :email, :string, null: false, unique: true
+      add :name, :string, null: false
 
       timestamps()
     end
