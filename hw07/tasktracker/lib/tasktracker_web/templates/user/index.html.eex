@@ -1,24 +1,48 @@
 <h2>Listing Users</h2>
 
+
+<script>
+ window.manage_path = "<%= manage_path(@conn, :index) %>";
+ window.current_user_id = "<%= @current_user.id %>";
+</script>
+
 <table class="table">
   <thead>
     <tr>
+      <th>Manage</th>
       <th>Email</th>
       <th>Name</th>
 
       <th></th>
     </tr>
   </thead>
+
   <tbody>
-<%= for user <- @users do %>
+  <%= for user <- @users do %>
     <tr>
+
+      <%= if user.id == @current_user.id do %>
+      <td>
+      <button class="btn btn-secondary" onclick="alert('can't Unmanage yourself');">
+        Unmanage
+      </button>
+      <% else %>
+      <td>
+      <button class="manage-button btn btn-secondary"
+              data-user-id="<%= user.id %>"
+              data-manage="<%= @manages[user.id] %>">
+        Manage
+      </button>
+      <% end %>
+      </td>
+
       <td><%= user.email %></td>
       <td><%= user.name %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <!-- <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span> 
+        <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>-->
       </td>
     </tr>
 <% end %>

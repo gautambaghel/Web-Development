@@ -15,15 +15,15 @@
   <div class="container">
     <div class="row">
       <%= if @current_user do %>
-        <div class="col-9">
+        <div class="col-8">
           <p class="p-4">
             <a href="/tasks">Tasks</a> |
-            <a href="/users">All Users</a>
+            <a href="/users">Manage Users</a>
           </p>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <p class="p-4">
-            Logged in as: <%= @current_user.name %> |
+            Logged in as: <%= link @current_user.name, to: user_path(@conn, :show, @current_user.id) %> |
             <%= link "Log Out", to: "/session", method: :delete %>
           </p>
         </div>

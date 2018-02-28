@@ -1,33 +1,17 @@
-<h2>Show Task</h2>
+<h1><strong>Task Description</strong></h1>
+     <br>
 
-<ul>
+    <h2><%= @task.name %></h2>
+     <br>
+    <div class="card">
+      <div class="card-body">
+        <!-- <span class="float-right"><strong>Task spent:</strong> <%= @task.time_spent %></span> -->
+        <h5 class="card-title"><strong>Description:</strong></h5>
+         <h6 class="card-subtitle mb-2 text-muted">To be done by <%= @task.user_email_assigned %> | assigned by <%= @task.user.name %></h6>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <p><%= @task.description %></p>
+      </div>
+    </div>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @task.name %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @task.description %>
-  </li>
-
-  <li>
-    <strong>Time beg:</strong>
-    <%= @task.time_beg %>
-  </li>
-
-  <li>
-    <strong>Time end:</strong>
-    <%= @task.time_end %>
-  </li>
-
-  <li>
-    <strong>Completed:</strong>
-    <%= @task.completed %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: task_path(@conn, :edit, @task) %></span>
-<span><%= link "Back", to: task_path(@conn, :index) %></span>
+     <br>
+<span><%= link "\<\<\ Go Back", to: task_path(@conn, :index), class: "btn btn-outline-primary btn-xs" %></span>

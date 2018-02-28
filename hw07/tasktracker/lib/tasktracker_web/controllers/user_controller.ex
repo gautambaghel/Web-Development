@@ -5,8 +5,10 @@ defmodule TasktrackerWeb.UserController do
   alias Tasktracker.Accounts.User
 
   def index(conn, _params) do
+    current_user = conn.assigns[:current_user]
     users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    manages = Tasktracker.Activity.manages_map_for(current_user.id)
+    render(conn, "index.html", users: users, manages: manages)
   end
 
   def new(conn, _params) do
@@ -17,6 +19,7 @@ defmodule TasktrackerWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
+        Tasktracker.Activity.create_manage(%{"managee_id" => user.id, "manager_id" => user.id});
         conn
         |> put_flash(:info, "User created successfully, please log in now.")
         |> redirect(to: page_path(conn, :index))
@@ -27,7 +30,9 @@ defmodule TasktrackerWeb.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    render(conn, "show.html", user: user)
+    managees = Tasktracker.Activity.get_managees_for(id)
+    managers = Tasktracker.Activity.get_managers_for(id)
+    render(conn, "show.html", user: user, managees: managees, managers: managers)
   end
 
   def edit(conn, %{"id" => id}) do

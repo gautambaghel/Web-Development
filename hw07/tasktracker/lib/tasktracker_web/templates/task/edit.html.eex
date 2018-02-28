@@ -1,5 +1,10 @@
-<h2>Edit Task</h2>
+<h2>Update Task</h2>
 
-<%= render "form.html", Map.put(assigns, :action, task_path(@conn, :update, @task)) %>
+<script>
+ window.timeblocks_path = "<%= time_block_path(@conn, :index) %>";
+ window.current_user_id = "<%= @current_user.id %>";
+</script>
+
+<%= render "form_assignee.html", Map.put(assigns, :action, task_path(@conn, :update, @task)) %>
 
 <span><%= link "Back", to: task_path(@conn, :index) %></span>

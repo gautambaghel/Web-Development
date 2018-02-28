@@ -1,29 +1,36 @@
-<h2>Listing Tasks</h2>
+<h2>Tasks assigned by you</h2>
+
+<script>
+ window.timeblocks_path = "<%= time_block_path(@conn, :index) %>";
+ window.current_user_id = "<%= @current_user.id %>";
+</script>
 
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Title</th>
       <th>Description</th>
-      <th>Time beg</th>
-      <th>Time end</th>
       <th>Completed</th>
+      <th>Assignee</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for task <- @tasks do %>
+<%= for task <- @tasks_assigned  do %>
     <tr>
+      <td><%= task.user.name %></td>
       <td><%= task.name %></td>
-      <td><%= task.description %></td>
-      <td><%= task.time_beg %></td>
-      <td><%= task.time_end %></td>
-      <td><%= task.completed %></td>
+      <td><span><%= link "Details", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span></td>
+ 	<%= if task.completed do %>
+      <td> <input type="checkbox" onClick="return false;" checked/></td>
+ 	<% else %>
+      <td> <input type="checkbox" onClick="return false;"/></td>
+ 	<% end %>
+      <td><%= task.user_email_assigned %></td>
 
-      <td class="text-right">
-        <span><%= link "Show", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: task_path(@conn, :edit, task), class: "btn btn-default btn-xs" %></span>
+      <td class="text-right"> 
         <span><%= link "Delete", to: task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
@@ -31,4 +38,52 @@
   </tbody>
 </table>
 
-<span><%= link "New Task", to: task_path(@conn, :new) %></span>
+<span><%= link "Assign New Task", to: task_path(@conn, :new), class: "btn btn-primary btn-xs" %></span>
+<hr>
+
+<h2>Tasks assigned to you</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Assignor</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Working</th>
+      <th>Completed</th>
+      <th>Assignee</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for task <- @tasks do %>
+    <tr>
+      <td><%= task.user.name %></td>
+      <td><%= task.name %></td>
+      <td><span><%= link "Details", to: task_path(@conn, :show, task), class: "btn btn-default btn-xs" %></span></td>
+      
+      <td>
+      <button class="work-button btn btn-secondary"
+              data-task-id="<%= task.id %>"
+              data-timeblock-status="<%= @timeblock[task.id] %>"
+              data-timeblock-last-id="<%= @last_timeblock_ids[task.id] %>">
+        Start Working
+      </button>
+      </td>
+      
+ 	<%= if task.completed do %>
+      <td> <input type="checkbox" onClick="return false;" checked/></td>
+ 	<% else %>
+      <td> <input type="checkbox" onClick="return false;"/></td>
+ 	<% end %>
+      <td><%= task.user_email_assigned %></td>
+
+      <td class="text-right"> 
+        <span><%= link "Update", to: task_path(@conn, :edit , task), class: "btn btn-primary btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+

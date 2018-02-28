@@ -17,32 +17,21 @@
     <%= error_tag f, :description %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :time_beg, class: "control-label" %>
-    <%= datetime_select f, :time_beg, class: "form-control" %>
-    <%= error_tag f, :time_beg %>
+  <div class="form-group sr-only">
+    <%= label f, :time_spent, class: "control-label" %>
+    <%= text_input f, :time_spent, class: "form-control" , value: 0 %>
+    <%= error_tag f, :time_spent %>
   </div>
 
-  <div class="form-group">
-    <%= label f, :time_end, class: "control-label" %>
-    <%= datetime_select f, :time_end, class: "form-control" %>
-    <%= error_tag f, :time_end %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :completed, class: "control-label" %>
-    <%= checkbox f, :completed, class: "checkbox" %>
-    <%= error_tag f, :completed %>
-  </div>
-
-  <div class="form-group">
-    <%= label f, :user_id, class: "control-label sr-only" %>
-    <%= text_input f, :user_id, class: "form-control sr-only", value: @current_user.id, readonly: :true%>
+  <div class="form-group  sr-only">
+    <%= label f, :user_id, class: "control-label" %>
+    <%= text_input f, :user_id, class: "form-control", value: @current_user.id, readonly: :true%>
+    <%= error_tag f, :user_id %>
   </div>
 
   <div class="form-group">
     <%= label f, "assign to (email)", class: "control-label" %>
-    <%= text_input f, :user_email_assigned, class: "form-control", required: "required" %>
+    <%= select f, :user_email_assigned , Enum.map(@managees, &{&1.name, &1.email}) %>
     <%= error_tag f, :user_email_assigned %>
   </div>
 

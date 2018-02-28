@@ -1,18 +1,47 @@
-<h2>Show User</h2>
+<h2><strong><%= @user.name %></strong></h2>
+<h4><%= @user.email %></h4>
 
-<ul>
+<hr>
+<div class="modal-body row">
+ <div class="col-md-6">
+    <table>
+      <thead>
+       <tr>
+        <th><strong>Managee:</strong></th>
+       </tr>
+      </thead>
+      <tbody>
+       <%= for managee <- @managees do %>
+          <tr>
+            <td>
+              <%= managee.name %>
+            </td>
+         </tr>
+       <% end %>
+     </tbody>
+    </table>
+  </div>
 
-  <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
+  <div class="col-md-6">
+    <table>
+      <thead>
+       <tr>
+        <th><strong>Manager:</strong></th>
+       </tr>
+      </thead>
+      <tbody>
+       <%= for manager <- @managers do %>
+          <tr>
+            <td>
+              <%= manager.name %>
+            </td>
+         </tr>
+       <% end %>
+     </tbody>
+    </table>
+  </div>
+</div>
+<hr>
 
-  <li>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<span><%= link "\<\<\ Go Back", to: user_path(@conn, :index), class: "btn btn-outline-primary btn-xs" %></span>
+<span><%= link "Edit", to: user_path(@conn, :edit, @user), class: "btn btn-primary btn-xs" %></span>
