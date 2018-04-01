@@ -109,7 +109,7 @@
 
           var year = date.getFullYear();
           var month = pad(date.getMonth()+1,2); // beware: January = 0; February = 1, . Padding to 01,02,...12
-          var day = date.getDate();
+          var day = pad(date.getDate(),2);
 
           return String(year)+"-"+String(month)+"-"+String(day)+"T"+String(hour)+":"+String(minutes)+":"+String(seconds)+"."+String(milliSeconds);
   }
@@ -122,6 +122,7 @@
 
   function start_working(task_id) {
 
+      console.log("started working");
       let timestamp = get_current_timestamp();
       
           let text = JSON.stringify({
@@ -176,7 +177,7 @@
     let task_id = btn.data('task-id');
     let status = btn.data('timeblock-status');
     let last_timeblock_id = btn.data('timeblock-last-id');
-    
+
     if(status){
        stop_working(task_id,last_timeblock_id);
     } else {
@@ -232,10 +233,8 @@
   }
 
   function init_manage() {
-    if (!$('.manage-button') || 
-      !$('.work-button') ||
-      !$('.time-delete-button') ||
-      !$('.time-update-button')){
+    if (!$('.manage-button') || !$('.work-button') ||
+        !$('.time-delete-button') || !$('.time-update-button')){
       return;
     }
 

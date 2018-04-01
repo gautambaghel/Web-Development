@@ -13,6 +13,7 @@ defmodule TasktrackerWeb.TimeBlockController do
 
   def create(conn, %{"time_block" => time_block_params}) do
     with {:ok, %TimeBlock{} = time_block} <- Activity.create_time_block(time_block_params) do
+    IO.puts "reached here"
       conn
       |> put_status(:created)
       |> put_resp_header("location", time_block_path(conn, :show, time_block))

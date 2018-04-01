@@ -325,6 +325,11 @@
 
       """
       def create_time_block(attrs \\ %{}) do
+
+        %TimeBlock{}
+        |> TimeBlock.changeset(attrs)
+        |> IO.inspect
+        
         %TimeBlock{}
         |> TimeBlock.changeset(attrs)
         |> Repo.insert()
