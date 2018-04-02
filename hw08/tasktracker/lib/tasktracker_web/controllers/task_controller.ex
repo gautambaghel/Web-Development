@@ -11,7 +11,14 @@ defmodule TasktrackerWeb.TaskController do
     render(conn, "index.json", tasks: tasks)
   end
 
-  def create(conn, %{"task" => task_params}) do
+  def create(conn, %{"task" => task_params, "token" => token}) do
+
+    {:ok, user_id} = Phoenix.Token.verify(conn, "auth token", token, max_age: 86400)
+    if task_params["user_id"] != user_id do
+      IO.inspect({:bad_match, task_params["user_id"], user_id})
+      raise "hax!"
+    end
+
     with {:ok, %Task{} = task} <- Tasks.create_task(task_params) do
       conn
       |> put_status(:created)

@@ -37,6 +37,11 @@ defmodule Tasktracker.Users do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_and_auth_user(email, pass) do
+      user = Repo.one(from u in User, where: u.email == ^email)
+      Comeonin.Argon2.check_pass(user, pass)
+  end
+
   @doc """
   Creates a user.
 

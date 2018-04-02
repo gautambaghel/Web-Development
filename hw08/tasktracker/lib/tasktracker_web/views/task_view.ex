@@ -16,6 +16,8 @@ defmodule TasktrackerWeb.TaskView do
       time_spent: task.time_spent,
       completed: task.completed,
       description: task.description,
+      title: task.title,
+      user_email_assigned: task.user_email_assigned,
       user: render_one(task.user, UserView, "user.json")}
   end
 end
