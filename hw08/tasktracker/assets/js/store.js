@@ -36,7 +36,8 @@ function users(state = [], action) {
 
 let empty_form = {
   user_id: "",
-  body: "",
+  description: "",
+  title: "",
   token: "",
 };
 

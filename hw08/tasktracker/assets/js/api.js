@@ -31,7 +31,7 @@ class TheServer {
 
   submit_task(data) {
     $.ajax("/api/v1/tasks", {
-      method: "task",
+      method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({ token: data.token, task: data }),

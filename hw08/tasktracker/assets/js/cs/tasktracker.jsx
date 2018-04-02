@@ -7,6 +7,7 @@ import Nav from './nav';
 import Tasks from './tasks';
 import Users from './users';
 import TaskForm from './task-form';
+import RegisterForm from './register-form';
 
 export default function tasktracker_init(store) {
   ReactDOM.render(
@@ -18,14 +19,25 @@ export default function tasktracker_init(store) {
 }
 
 let Tasktracker = connect((state) => state)((props) => {
+
+  let task_form;
+  if (props.token) {
+    task_form = <div>
+     <TaskForm />
+     <Tasks tasks={props.tasks} />
+    </div>;
+  }
+  else {
+    task_form = <RegisterForm />;
+  }
+
   return (
     <Router>
       <div>
         <Nav />
         <Route path="/" exact={true} render={() =>
           <div>
-            <TaskForm />
-            <Tasks tasks={props.tasks} />
+            {task_form}
           </div>
         } />
         <Route path="/users" exact={true} render={() =>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, FormGroup, Label, Input } from 'reactstrap';
 import api from '../api';
 
-function PostForm(props) {
+function TaskForm(props) {
 
   function update(ev) {
     let tgt = $(ev.target);
@@ -18,7 +18,7 @@ function PostForm(props) {
   }
 
   function submit(ev) {
-    api.submit_post(props.form);
+    api.submit_task(props.form);
   }
 
   function clear(ev) {
@@ -44,7 +44,7 @@ function PostForm(props) {
       <Label for="description">Description</Label>
       <Input type="textarea" name="body" value={props.form.description} onChange={update} />
     </FormGroup>
-    <Button onClick={submit} color="primary">Post</Button> &nbsp;
+    <Button onClick={submit} color="primary">Add Task</Button> &nbsp;
     <Button onClick={clear}>Clear</Button>
   </div>;
 }
@@ -56,4 +56,4 @@ function state2props(state) {
   };
 }
 
-export default connect(state2props)(PostForm);
+export default connect(state2props)(TaskForm);
