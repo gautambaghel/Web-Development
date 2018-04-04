@@ -68,6 +68,10 @@ class TheServer {
       data: JSON.stringify(new_data),
       success: (resp) => {
         store.dispatch({
+          type: 'ADD_USER',
+          user: resp,
+        });
+        store.dispatch({
           type: 'SET_TOKEN',
           token: resp,
         });
