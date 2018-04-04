@@ -26,11 +26,11 @@ defmodule Seeds do
     d = Repo.insert!(%User{ email: "dave@gmail.com", name: "dave", password_hash: p })
 
     Repo.delete_all(Task)
-    Repo.insert!(%Task{ user_id: a.id, title: "HW08" , description: "Do this homework!", user_email_assigned: a.email })
-    Repo.insert!(%Task{ user_id: b.id, title: "Redux" , description: "Incorporate redux in to th SPA", user_email_assigned: a.email  })
-    Repo.insert!(%Task{ user_id: b.id, title: "Password" , description: "Implement password encription", user_email_assigned: a.email  })
-    Repo.insert!(%Task{ user_id: c.id, title: "Encription" , description: "Hash and storing the password", user_email_assigned: b.email  })
-    Repo.insert!(%Task{ user_id: d.id, title: "Https" , description: "Secure connection", user_email_assigned: c.email  })
+    Repo.insert!(%Task{ user_id: a.id, title: "HW08" , description: "Do this homework!", user_email_assigned: a.email, time_spent: 0 })
+    Repo.insert!(%Task{ user_id: b.id, title: "Redux" , description: "Incorporate redux in to th SPA", user_email_assigned: a.email, time_spent: 0 })
+    Repo.insert!(%Task{ user_id: b.id, title: "Password" , description: "Implement password encription", user_email_assigned: a.email, time_spent: 0 })
+    Repo.insert!(%Task{ user_id: c.id, title: "Encription" , description: "Hash and storing the password", user_email_assigned: b.email, time_spent: 0 })
+    Repo.insert!(%Task{ user_id: d.id, title: "Https" , description: "Secure connection", user_email_assigned: c.email, time_spent: 0  })
   end
 end
 

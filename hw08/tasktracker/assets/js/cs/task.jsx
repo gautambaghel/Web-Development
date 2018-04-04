@@ -8,6 +8,7 @@ export default function Task(params) {
         <td>{ task.description }</td>
         {task.completed ? ( <td> <input type="checkbox" checked/></td> )
                     : ( <td> <input type="checkbox"/></td> )}
+        <td>{ task.time_spent }</td>
         <td>{ task.user_email_assigned }</td>
     </tr>;
 }

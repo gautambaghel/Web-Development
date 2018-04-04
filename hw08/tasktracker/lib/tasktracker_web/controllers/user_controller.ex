@@ -12,11 +12,13 @@ defmodule TasktrackerWeb.UserController do
   end
 
   def create(conn, %{"user" => user_params}) do
+    p = Comeonin.Argon2.hashpwsalt(user_params["password_hash"])
+    user_params = user_params |> Map.put("password_hash", p)
     with {:ok, %User{} = user} <- Users.create_user(user_params) do
+      token = Phoenix.Token.sign(conn, "auth token", user.id)
       conn
       |> put_status(:created)
-      |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("token.json", user: user, token: token)
     end
   end
 

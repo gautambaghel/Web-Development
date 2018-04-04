@@ -38,6 +38,8 @@ let empty_form = {
   user_id: "",
   description: "",
   title: "",
+  user_email_assigned: "",
+  time_spent: "0",
   token: "",
 };
 
@@ -77,10 +79,26 @@ function login(state = empty_login, action) {
   }
 }
 
+
+let empty_register = {
+  name: "",
+  email: "",
+  password_hash: "",
+};
+
+function register(state = empty_register, action) {
+  switch (action.type) {
+    case 'UPDATE_REGISTER_FORM':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   // {tasks, users, form} is ES6 shorthand for
   // {tasks: tasks, users: users, form: form}
-  let reducer = combineReducers({tasks, users, form, token, login});
+  let reducer = combineReducers({tasks, users, form, token, login, register});
   let state1 = reducer(state0, action);
   return deepFreeze(state1);
 };

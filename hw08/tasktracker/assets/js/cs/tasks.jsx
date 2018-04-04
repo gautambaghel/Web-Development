@@ -11,6 +11,7 @@ export default function Tasks(params) {
         <th>Title</th>
         <th>Description</th>
         <th>Completed</th>
+        <th>Time Spent</th>
         <th>Assignee</th>
       </tr>
     </thead>

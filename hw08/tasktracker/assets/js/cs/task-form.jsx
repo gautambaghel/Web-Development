@@ -27,23 +27,26 @@ function TaskForm(props) {
     });
   }
 
-  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.id}>{uu.name}</option>);
+  let users = _.map(props.users, (uu) => <option key={uu.id} value={uu.email}>{uu.name}</option>);
   return <div style={{padding: "4ex"}}>
     <h2>New Task</h2>
     <FormGroup>
       <Label for="user_id">Assignee</Label>
-      <Input type="select" name="user_id" value={props.form.user_id} onChange={update}>
+      <Input type="select" name="user_email_assigned" value={props.form.user_email_assigned} onChange={update}>
         { users }
       </Input>
     </FormGroup>
     <FormGroup>
       <Label for="title">Title</Label>
-      <Input type="textarea" name="body" value={props.form.title} onChange={update} />
+      <Input type="textarea" name="title" value={props.form.title} onChange={update} />
     </FormGroup>
     <FormGroup>
       <Label for="description">Description</Label>
-      <Input type="textarea" name="body" value={props.form.description} onChange={update} />
+      <Input type="textarea" name="description" value={props.form.description} onChange={update} />
     </FormGroup>
+      <Input type="textarea" className="sr-only" name="user_id" value={props.form.user_id} readOnly/>
+      <Input type="textarea" className="sr-only" name="time_spent" value={props.form.time_spent} readOnly/>
+
     <Button onClick={submit} color="primary">Add Task</Button> &nbsp;
     <Button onClick={clear}>Clear</Button>
   </div>;

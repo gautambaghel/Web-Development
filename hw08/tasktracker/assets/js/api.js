@@ -59,6 +59,22 @@ class TheServer {
     });
   }
 
+  submit_register(data) {
+    let new_data = {user: data};
+    $.ajax("/api/v1/users", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(new_data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'SET_TOKEN',
+          token: resp,
+        });
+      },
+    });
+  }
+
   logout() {
     $.ajax("/api/v1/token", {
       method: "delete",
