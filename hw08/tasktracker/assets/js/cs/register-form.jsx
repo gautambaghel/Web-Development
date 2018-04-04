@@ -22,7 +22,6 @@ function RegisterForm(props) {
     api.submit_register(props.register);
   }
 
-
   return <div style={{padding: "4ex"}} className="col-6">
     <h2>Make a New Account</h2>
     <FormGroup>
@@ -40,8 +39,6 @@ function RegisterForm(props) {
     <Button onClick={register} color="primary" >Register</Button>
   </div>;
 }
-
-
 
 function state2props(state) {
   return {

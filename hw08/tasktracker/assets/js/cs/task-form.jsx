@@ -18,7 +18,13 @@ function TaskForm(props) {
   }
 
   function submit(ev) {
-    api.submit_task(props.form);
+    if(props.form.user_email_assigned === ""){
+       let new_form = Object.assign({},props.form);
+       new_form.user_email_assigned = props.users[0].email;
+       api.submit_task(new_form);
+    } else {
+       api.submit_task(props.form);
+    }
   }
 
   function clear(ev) {

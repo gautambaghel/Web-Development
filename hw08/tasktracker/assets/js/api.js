@@ -75,6 +75,22 @@ class TheServer {
     });
   }
 
+  submit_update_task(data, id) {
+    let new_data = {id: id, task: data};
+    $.ajax("/api/v1/tasks/"+id, {
+      method: "put",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(new_data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'EDIT_TASK',
+          task: resp.data,
+        });
+      },
+    });
+  }
+
   logout() {
     $.ajax("/api/v1/token", {
       method: "delete",
